@@ -7,7 +7,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CatalogComponent } from './catalog/catalog.component';
-import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import {AgGridModule} from 'ag-grid-angular';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import {HashLocationStrategy, LocationStrategy} from '@angular/common';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    AgGridModule.withComponents([CatalogComponent])
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},
