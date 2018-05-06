@@ -38,6 +38,40 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.25.2</version>
+                <configuration>
+                    <dockerHost>unix:///var/run/docker.sock</dockerHost>
+                    <verbose>true</verbose>
+                    <images>
+                        <image>
+                            <name>${docker.hub.user}/${docker.image.name}</name>
+                            <build>
+                                <dockerFileDir>${project.basedir}/src/main/docker/</dockerFileDir>
+                                <assembly>
+                                    <descriptorRef>artifact</descriptorRef>
+                                </assembly>
+                                <tags>
+                                    <tag>latest</tag>
+                                    <tag>${project.version}</tag>
+                                </tags>
+                            </build>
+                        </image>
+                    </images>
+                    <healthCheck>
+                        <!-- Check every 5 minutes -->
+                        <interval>1m</interval>
+                        <!-- Fail if no response after 3 seconds -->
+                        <timeout>3s</timeout>
+                        <!-- Fail 3 times until the container is considerd unhealthy -->
+                        <retries>3</retries>
+                        <!-- Command to execute in shell form -->
+                        <cmd>curl -f http://localhost:8080 || exit 1</cmd>
+                    </healthCheck>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
