@@ -1,3 +1,6 @@
+import {HttpProductService} from '../app/catalog/services/ProductService';
+
 export const environment = {
-  production: true
+  production: true,
+  productServiceType: HttpProductService
 };

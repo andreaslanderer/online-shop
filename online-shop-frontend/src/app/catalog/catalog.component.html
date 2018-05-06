@@ -1,3 +1,9 @@
 <div class="container">
-  <p>Catalog is still work in progress...</p>
+
+  <ag-grid-angular
+    style="width: 100%; height: 700px;"
+    class="ag-theme-balham"
+    [rowData]="products"
+    [columnDefs]="columnDefs">
+  </ag-grid-angular>
 </div>
